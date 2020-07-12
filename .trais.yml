@@ -1,0 +1,19 @@
+sudo: required
+services:
+  - docker
+before install:
+  - docker build -t sangam156/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run sangam156/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t sangam156/muli-client ./client
+  - docker build -t sangam156/multi-nginx ./nginx
+  - docker build -t sangam156/multi-server ./server
+  - docker build -t sangam156/multi-worker ./worker
+  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push sangam156/muli-client
+  - docker push sangam156/multi-nginx
+  - docker push sangam156/multi-server
+  - docker push sangam156/multi-worker
