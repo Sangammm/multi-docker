@@ -1,0 +1,19 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "client",
+			"image": "sangam156/muli-client",
+			"hostname": "client",
+			"essential": true
+		},
+		{
+			"name": "server",
+			"image": "sangam156/muli-server"
+		},
+		{
+			"name": "worker",
+			"image": "sangam156/muli-worker"
+		}
+	]
+}
