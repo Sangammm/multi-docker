@@ -5,7 +5,7 @@ before install:
   - docker build -t sangam156/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run sangam156/react-test npm test -- --coverage
+  - docker run -e CI=true USERNAME/react-test npm test
 
 after_success:
   - docker build -t sangam156/muli-client ./client
